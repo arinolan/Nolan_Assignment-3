@@ -1,0 +1,46 @@
+---
+title: "Nolan_Assignment 3"
+output: html_document
+date: "2022-09-18"
+---
+
+```{r import data from gethub}
+library(RCurl)
+library(dplyr)
+
+x<- getURL("https://raw.githubusercontent.com/fivethirtyeight/data/master/college-majors/all-ages.csv")
+data <-read.csv(text=x)
+```
+
+```{r question 1 majors that contain either "DATA" or "STATISTICS"}
+new_data <- data %>%
+  filter(grepl('DATA | STATISTICS', Major))
+```
+
+```{r question 2}
+y <- ('bell pepper, bilberry, blackberry, blood orange, blueberry, cantaloupe, chili pepper, cloudberry, elderberry, lime, lychee, mulberry, olive, salal berry')
+writeLines(y)
+
+
+
+values <- c("bell pepper", "bilberry", "blackberry", "blood orange", "blueberry", "cantaloupe", "chili pepper", "cloudberry", "elderberry", "lime", "lychee", "mulberry", "olive", "salal berry")
+
+cat(paste0("c(",paste0(sep = '"',values, collapse = ', ', sep='"'),paste(")")))
+```
+
+question 3
+(.)\1\1 <- any 2 characters that repeat in reverse order
+"(.)(.)\\2\\1" <- any 2 characters that repeat in the same order 
+(..)\1 <- any 2 characters that repeat
+"(.).\\1.\\1" <- any character that repeats 2 or more times
+"(.)(.)(.).*\\3\\2\\1" <- any 3 characters that repeat in reverse order 
+
+```{r question 4}
+names <- c('joe', 'bob', 'anna', 'emma', 'trent', 'hannah', 'church', 'ariana')
+
+str_subset(names, "^(.)((.*\\1$)|\\1?$)")
+
+str_subset(names, "([A-Za-z][A-Za-z]).*\\1")
+
+str_subset(names, "([A-Za-z]).*\\1.*\\1")
+```
